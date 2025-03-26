@@ -1,0 +1,18 @@
+services:
+  db:
+    image: 'postgres'
+    environment:
+      - 'POSTGRES_DB=test1221'
+      - 'POSTGRES_PASSWORD=0000'
+      - 'POSTGRES_USER=postgres'
+    ports:
+      - '5433:5432'
+  app:
+    image: axlet/test1221
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '8080:8080'
+    depends_on:
+      - db
