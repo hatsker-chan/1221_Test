@@ -25,6 +25,9 @@ public class Customer {
     @Column(name = "age")
     private short age;
 
+    @Column(name = "gender")
+    private boolean gender;
+
     @Column(name = "weight", nullable = false)
     private float weight;
 
@@ -34,4 +37,8 @@ public class Customer {
     @Enumerated(EnumType.STRING)
     @Column(name = "goal", nullable = false)
     private Goal goal;
+
+    public boolean getGender() {
+        return gender;
+    }
 }
