@@ -29,6 +29,7 @@ public class CustomerService {
                 .name(customer.getName())
                 .age(customer.getAge())
                 .email(customer.getEmail())
+                .gender(customer.getMale())
                 .height(customer.getHeight())
                 .weight(customer.getWeight())
                 .goal(goal)

@@ -1,18 +1,12 @@
 package com.example._test.api.dto;
 
-import com.example._test.core.model.Goal;
-import jakarta.persistence.Column;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
 public class PostCustomerDto {
     private String name;
 
@@ -20,9 +14,15 @@ public class PostCustomerDto {
 
     private short age;
 
+    private boolean isMale;
+
     private float weight;
 
     private float height;
 
     private String goal;
+
+    public boolean getMale() {
+        return isMale;
+    }
 }

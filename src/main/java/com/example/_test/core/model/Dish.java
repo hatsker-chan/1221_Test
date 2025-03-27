@@ -13,7 +13,8 @@ public class Dish {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long dishId;
+    @Column(name = "dish_id")
+    private Long dishId;
 
     @Column(nullable = false)
     private String title;
