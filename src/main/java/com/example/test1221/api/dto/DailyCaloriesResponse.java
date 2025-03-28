@@ -8,5 +8,5 @@ import lombok.Setter;
 @Getter
 @Setter
 public class DailyCaloriesResponse {
-    int dailyCalories;
+    private int dailyCalories;
 }
