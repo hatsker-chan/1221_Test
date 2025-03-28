@@ -1,9 +1,9 @@
-package com.example._test.core.service;
+package com.example.test1221.core.service;
 
-import com.example._test.api.dto.PostCustomerDto;
-import com.example._test.core.model.Customer;
-import com.example._test.core.model.Goal;
-import com.example._test.core.repository.CustomerRepository;
+import com.example.test1221.api.dto.PostCustomerDto;
+import com.example.test1221.core.model.Customer;
+import com.example.test1221.core.model.Goal;
+import com.example.test1221.core.repository.CustomerRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +37,7 @@ public class CustomerService {
 
         return customerRepository.save(newCustomer);
     }
-
+    
     private boolean checkEmail(String email) {
         return customerRepository.findByEmail(email).isPresent();
 

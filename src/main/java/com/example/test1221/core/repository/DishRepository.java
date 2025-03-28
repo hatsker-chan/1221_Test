@@ -1,6 +1,6 @@
-package com.example._test.core.repository;
+package com.example.test1221.core.repository;
 
-import com.example._test.core.model.Dish;
+import com.example.test1221.core.model.Dish;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

@@ -1,8 +1,10 @@
-package com.example._test.core.model;
+package com.example.test1221.core.model;
 
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -14,13 +16,16 @@ import java.util.Set;
 public class Meal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long mealId;
+    @Column(name = "meal_id")
+    private Long mealId;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "customer_id", referencedColumnName = "customer_id")
     private Customer customer;
 
     private String note;
+
+    private LocalDateTime date;
 
     @ManyToMany
     @JoinTable(

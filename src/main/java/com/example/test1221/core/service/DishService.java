@@ -1,10 +1,12 @@
-package com.example._test.core.service;
+package com.example.test1221.core.service;
 
-import com.example._test.api.dto.PostDishDto;
-import com.example._test.core.model.Dish;
-import com.example._test.core.repository.DishRepository;
+import com.example.test1221.api.dto.PostDishDto;
+import com.example.test1221.core.model.Dish;
+import com.example.test1221.core.repository.DishRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -17,7 +19,7 @@ public class DishService {
             throw new IllegalArgumentException("Dish with title " + dishDto.getTitle() + " already exists");
         }
         Dish dish = Dish.builder()
-                        .title(dishDto.getTitle())
+                .title(dishDto.getTitle())
                 .caloriesPerDish(dishDto.getCalories())
                 .protein(dishDto.getProtein())
                 .carbohydrates(dishDto.getCarbohydrates())
@@ -25,6 +27,10 @@ public class DishService {
                 .build();
 
         return dishRepository.save(dish);
+    }
+
+    public List<Dish> getAllDishes() {
+        return dishRepository.findAll();
     }
 
     private boolean checkDish(String title) {
