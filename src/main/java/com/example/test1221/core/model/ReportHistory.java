@@ -1,4 +1,4 @@
-package com.example.test1221.api.dto;
+package com.example.test1221.core.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,11 +9,11 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Builder
+@AllArgsConstructor
 @Getter
 @Setter
-@AllArgsConstructor
-public class ReportHistoryResponse {
+public class ReportHistory {
     private LocalDate dateFrom;
     private LocalDate dateTo;
-    private List<DailyReportResponse> reportHistory;
+    private List<DailyReport> dailyReports;
 }

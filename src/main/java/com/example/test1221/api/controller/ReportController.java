@@ -4,6 +4,7 @@ import com.example.test1221.api.dto.DailyReportResponse;
 import com.example.test1221.api.dto.ReportHistoryResponse;
 import com.example.test1221.api.mapper.Mapper;
 import com.example.test1221.core.model.DailyReport;
+import com.example.test1221.core.model.ReportHistory;
 import com.example.test1221.core.service.ReportService;
 import jakarta.annotation.Nullable;
 import lombok.RequiredArgsConstructor;
@@ -43,10 +44,11 @@ public class ReportController {
             @Nullable @RequestParam(name = "dateFrom", required = false) LocalDate dateFrom,
             @Nullable @RequestParam(name = "dateTo", required = false) LocalDate dateTo
     ) {
-        List<DailyReport> reportHistory = reportService.getReportsHistory(
+        ReportHistory reportHistory = reportService.getReportsHistory(
                 customerId, dateFrom, dateTo
         );
-        List<DailyReportResponse> reportHistoryResponse = reportHistory.stream().map(Mapper::mapDailyReportEntityToResponseDto).toList();
-        return new ReportHistoryResponse(reportHistoryResponse);
+        List<DailyReportResponse> dailyReportsResponse = reportHistory.getDailyReports().stream().map(Mapper::mapDailyReportEntityToResponseDto).toList();
+        return new ReportHistoryResponse(
+                reportHistory.getDateFrom(), reportHistory.getDateTo(), dailyReportsResponse);
     }
 }

@@ -27,7 +27,6 @@ public class Mapper {
                 .totalCarbohydrate(entity.getTotalCarbohydrate())
                 .totalFat(entity.getTotalFat())
                 .totalCalories(entity.getTotalCalories())
-                .caloriesGoal(entity.getCaloriesGoal())
                 .build();
     }
 }

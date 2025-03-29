@@ -1,9 +1,6 @@
 package com.example.test1221.core.service;
 
-import com.example.test1221.core.model.Customer;
-import com.example.test1221.core.model.DailyReport;
-import com.example.test1221.core.model.Dish;
-import com.example.test1221.core.model.Meal;
+import com.example.test1221.core.model.*;
 import com.example.test1221.core.repository.MealRepository;
 import jakarta.annotation.Nullable;
 import lombok.RequiredArgsConstructor;
@@ -22,12 +19,8 @@ public class ReportService {
     private final CustomerService customerService;
 
     public DailyReport getDailyReport(long customerId, @Nullable LocalDate dateTime) {
-        LocalDate date;
-        if (dateTime != null) {
-            date = dateTime;
-        } else {
-            date = LocalDate.now();
-        }
+        LocalDate date = dateTime != null ? dateTime : LocalDate.now();
+
 
         LocalDateTime startTime = date.atStartOfDay();
 
@@ -51,8 +44,6 @@ public class ReportService {
             }
         }
 
-        int caloriesGoal = customerService.getDailyCalories(customerId);
-
         return new DailyReport(
                 date,
                 meals.size(),
@@ -60,18 +51,20 @@ public class ReportService {
                 totalProtein,
                 totalCarbs,
                 totalFat,
-                totalCalories,
-                caloriesGoal
-
+                totalCalories
         );
     }
 
-    public List<DailyReport> getReportsHistory(long customerId, @Nullable LocalDate dateFrom, @Nullable LocalDate dateTo) {
+    public ReportHistory getReportsHistory(long customerId, @Nullable LocalDate dateFromArg, @Nullable LocalDate dateToArg) {
         Customer customer = customerService.findCustomerById(customerId);
 
-        dateFrom = dateFrom == null ? customer.getCreated_at() : dateFrom;
+        LocalDate dateFrom = dateFromArg == null ? customer.getCreated_at() : dateFromArg;
 
-        dateTo = dateTo == null ? LocalDate.now() : dateTo;
+        LocalDate dateTo = dateToArg == null ? LocalDate.now() : dateToArg;
+
+        ReportHistory.ReportHistoryBuilder reportHistoryBuilder = ReportHistory.builder()
+                .dateFrom(dateFrom)
+                .dateTo(dateTo);
 
         ArrayList<DailyReport> reports = new ArrayList<>();
         while (dateFrom.isBefore(dateTo)) {
@@ -83,6 +76,6 @@ public class ReportService {
             reports.add(dailyReport);
             dateFrom = dateFrom.plusDays(1);
         }
-        return reports;
+        return reportHistoryBuilder.dailyReports(reports).build();
     }
 }
