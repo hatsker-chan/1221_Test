@@ -3,7 +3,6 @@ package com.example.test1221.core.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
 

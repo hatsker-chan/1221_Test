@@ -1,6 +1,5 @@
 package com.example.test1221.api.dto;
 
-import com.example.test1221.core.model.Meal;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
