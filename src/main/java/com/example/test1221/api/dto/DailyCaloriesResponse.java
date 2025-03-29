@@ -8,5 +8,15 @@ import lombok.Setter;
 @Getter
 @Setter
 public class DailyCaloriesResponse {
+    private short age;
+
+    private boolean isMale;
+
+    private float weight;
+
+    private float height;
+
+    private String goal;
+
     private int dailyCalories;
 }

@@ -8,6 +8,7 @@ CREATE TABLE customer
     weight      FLOAT                                   NOT NULL,
     height      FLOAT                                   NOT NULL,
     goal        VARCHAR(255)                            NOT NULL,
+    created_at  date,
     CONSTRAINT pk_customer PRIMARY KEY (customer_id)
 );
 

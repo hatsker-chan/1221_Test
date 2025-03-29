@@ -1,5 +1,6 @@
 package com.example.test1221.core.service;
 
+import com.example.test1221.core.model.Customer;
 import com.example.test1221.core.model.DailyReport;
 import com.example.test1221.core.model.Dish;
 import com.example.test1221.core.model.Meal;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -52,8 +54,8 @@ public class ReportService {
         int caloriesGoal = customerService.getDailyCalories(customerId);
 
         return new DailyReport(
-                customerId,
                 date,
+                meals.size(),
                 meals,
                 totalProtein,
                 totalCarbs,
@@ -62,5 +64,25 @@ public class ReportService {
                 caloriesGoal
 
         );
+    }
+
+    public List<DailyReport> getReportsHistory(long customerId, @Nullable LocalDate dateFrom, @Nullable LocalDate dateTo) {
+        Customer customer = customerService.findCustomerById(customerId);
+
+        dateFrom = dateFrom == null ? customer.getCreated_at() : dateFrom;
+
+        dateTo = dateTo == null ? LocalDate.now() : dateTo;
+
+        ArrayList<DailyReport> reports = new ArrayList<>();
+        while (dateFrom.isBefore(dateTo)) {
+            DailyReport dailyReport = getDailyReport(customerId, dateFrom);
+            if (dailyReport.getTotalMeals() == 0) {
+                dateFrom = dateFrom.plusDays(1);
+                continue;
+            }
+            reports.add(dailyReport);
+            dateFrom = dateFrom.plusDays(1);
+        }
+        return reports;
     }
 }

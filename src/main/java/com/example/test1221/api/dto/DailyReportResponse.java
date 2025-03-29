@@ -1,20 +1,20 @@
-package com.example.test1221.core.model;
+package com.example.test1221.api.dto;
 
-import lombok.AllArgsConstructor;
+import com.example.test1221.core.model.Meal;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.List;
 
+@Builder
 @Getter
 @Setter
-@AllArgsConstructor
-public class DailyReport {
-
+public class DailyReportResponse {
     private LocalDate date;
     private int totalMeals;
-    private List<Meal> meals;
+    private List<MealResponseDto> meals;
 
     private int totalProtein;
     private int totalCarbohydrate;
@@ -22,4 +22,6 @@ public class DailyReport {
 
     private int totalCalories;
     private int caloriesGoal;
+
 }
+

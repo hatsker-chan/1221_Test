@@ -7,6 +7,10 @@ import com.example.test1221.core.repository.CustomerRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Month;
+
 @Service
 @AllArgsConstructor
 public class CustomerService {
@@ -32,6 +36,8 @@ public class CustomerService {
                 .gender(customer.getMale())
                 .height(customer.getHeight())
                 .weight(customer.getWeight())
+//                .created_at(LocalDate.now())
+                .created_at(LocalDate.of(2025, Month.MARCH, 25))
                 .goal(goal)
                 .build();
 
@@ -41,6 +47,12 @@ public class CustomerService {
     private boolean checkEmail(String email) {
         return customerRepository.findByEmail(email).isPresent();
 
+    }
+
+    public Customer findCustomerById(Long customerId) {
+        return customerRepository.findById(customerId).orElseThrow(
+                () -> new IllegalArgumentException("Customer not found with id: " + customerId)
+        );
     }
 
     public int getDailyCalories(long customerId) {

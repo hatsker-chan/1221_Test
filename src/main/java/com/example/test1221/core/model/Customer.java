@@ -3,6 +3,8 @@ package com.example.test1221.core.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -37,6 +39,9 @@ public class Customer {
     @Enumerated(EnumType.STRING)
     @Column(name = "goal", nullable = false)
     private Goal goal;
+
+    @Column(name = "created_at")
+    private LocalDate created_at;
 
     public boolean getGender() {
         return gender;

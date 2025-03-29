@@ -22,7 +22,16 @@ public class CustomerController {
 
     @GetMapping("/{customerId}/daily_calories")
     public ResponseEntity<DailyCaloriesResponse> getDailyCalories(@PathVariable long customerId) {
-        var response = new DailyCaloriesResponse(customerService.getDailyCalories(customerId));
+        int dailyCalories = customerService.getDailyCalories(customerId);
+        Customer customer = customerService.findCustomerById(customerId);
+        var response = new DailyCaloriesResponse(
+                customer.getAge(),
+                customer.getGender(),
+                customer.getWeight(),
+                customer.getHeight(),
+                customer.getGoal().name(),
+                dailyCalories
+        );
         return ResponseEntity.ok(response);
     }
 }
