@@ -1,6 +1,7 @@
 package com.example.test1221.core.service;
 
 import com.example.test1221.api.dto.PostCustomerDto;
+import com.example.test1221.core.exception.EntityNotFoundException;
 import com.example.test1221.core.exception.ExistenceException;
 import com.example.test1221.core.exception.ValidationException;
 import com.example.test1221.core.model.Customer;
@@ -51,13 +52,13 @@ public class CustomerService {
 
     public Customer findCustomerById(Long customerId) {
         return customerRepository.findById(customerId).orElseThrow(
-                () -> new IllegalArgumentException("Customer not found with id: " + customerId)
+                () -> new EntityNotFoundException("Customer not found with id: " + customerId)
         );
     }
 
     public int getDailyCalories(long customerId) {
         Customer customer = customerRepository.findById(customerId).orElseThrow(
-                () -> new IllegalArgumentException("Customer not found with id: " + customerId)
+                () -> new EntityNotFoundException("Customer not found with id: " + customerId)
         );
         Goal goal = customer.getGoal();
 
@@ -78,7 +79,7 @@ public class CustomerService {
         return (int) bmr;
     }
 
-    private boolean validateCustomer(PostCustomerDto customer) {
+    private void validateCustomer(PostCustomerDto customer) {
         if (!Pattern.compile("^(.+)@(\\S+) $").matcher(customer.getEmail()).matches()) {
             throw new ValidationException("Email is not valid: " + customer.getEmail());
         }
@@ -94,6 +95,5 @@ public class CustomerService {
         if (customer.getWeight() < 30 || customer.getWeight() > 200) {
             throw new ValidationException("Weight must be between 30 and 200");
         }
-        return true;
     }
 }

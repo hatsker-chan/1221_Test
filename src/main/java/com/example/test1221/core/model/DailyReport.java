@@ -21,4 +21,7 @@ public class DailyReport {
     private int totalFat;
 
     private int totalCalories;
+
+    private int goalCalories;
+    private boolean successInCalories;
 }

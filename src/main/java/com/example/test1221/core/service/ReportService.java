@@ -44,6 +44,8 @@ public class ReportService {
             }
         }
 
+        int goal = customerService.getDailyCalories(customerId);
+        boolean successInCals = ((double) Math.abs(totalCalories - goal) / goal < 0.1);
         return new DailyReport(
                 date,
                 meals.size(),
@@ -51,7 +53,9 @@ public class ReportService {
                 totalProtein,
                 totalCarbs,
                 totalFat,
-                totalCalories
+                totalCalories,
+                goal,
+                successInCals
         );
     }
 
