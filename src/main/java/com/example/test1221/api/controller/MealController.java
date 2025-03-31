@@ -3,6 +3,7 @@ package com.example.test1221.api.controller;
 import com.example.test1221.api.dto.MealResponseDto;
 import com.example.test1221.api.dto.PostMealDto;
 import com.example.test1221.api.dto.PostMealDtoWithDate;
+import com.example.test1221.api.exception.ApiExceptionHandling;
 import com.example.test1221.api.mapper.Mapper;
 import com.example.test1221.core.model.Meal;
 import com.example.test1221.core.service.MealService;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@ApiExceptionHandling
 @RestController
 @RequestMapping("/meals")
 @RequiredArgsConstructor

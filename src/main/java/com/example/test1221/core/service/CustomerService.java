@@ -11,7 +11,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.regex.Pattern;
 
 @Service
@@ -37,8 +36,8 @@ public class CustomerService {
                 .gender(customer.getMale())
                 .height(customer.getHeight())
                 .weight(customer.getWeight())
-//                .created_at(LocalDate.now())
-                .created_at(LocalDate.of(2025, Month.MARCH, 25))
+                .created_at(LocalDate.now())
+//                .created_at(LocalDate.of(2025, Month.MARCH, 25))
                 .goal(goal)
                 .build();
 
@@ -46,8 +45,7 @@ public class CustomerService {
     }
 
     private boolean checkEmail(String email) {
-        return customerRepository.findByEmail(email).isPresent();
-
+        return customerRepository.existsByEmail(email);
     }
 
     public Customer findCustomerById(Long customerId) {
@@ -80,7 +78,7 @@ public class CustomerService {
     }
 
     private void validateCustomer(PostCustomerDto customer) {
-        if (!Pattern.compile("^(.+)@(\\S+) $").matcher(customer.getEmail()).matches()) {
+        if (!Pattern.compile("^(.+)@(\\S+)$").matcher(customer.getEmail()).matches()) {
             throw new ValidationException("Email is not valid: " + customer.getEmail());
         }
         if (checkEmail(customer.getEmail())) {

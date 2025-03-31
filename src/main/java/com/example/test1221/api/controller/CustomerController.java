@@ -2,12 +2,14 @@ package com.example.test1221.api.controller;
 
 import com.example.test1221.api.dto.DailyCaloriesResponse;
 import com.example.test1221.api.dto.PostCustomerDto;
+import com.example.test1221.api.exception.ApiExceptionHandling;
 import com.example.test1221.core.model.Customer;
 import com.example.test1221.core.service.CustomerService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@ApiExceptionHandling
 @RestController
 @RequestMapping("/customers")
 @AllArgsConstructor

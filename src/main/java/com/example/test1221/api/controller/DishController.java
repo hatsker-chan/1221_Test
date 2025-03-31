@@ -1,6 +1,7 @@
 package com.example.test1221.api.controller;
 
 import com.example.test1221.api.dto.PostDishDto;
+import com.example.test1221.api.exception.ApiExceptionHandling;
 import com.example.test1221.core.model.Dish;
 import com.example.test1221.core.service.DishService;
 import lombok.AllArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@ApiExceptionHandling
 @RestController
 @AllArgsConstructor
 @RequestMapping("/dishes")

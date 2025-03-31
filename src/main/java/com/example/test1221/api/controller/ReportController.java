@@ -2,6 +2,7 @@ package com.example.test1221.api.controller;
 
 import com.example.test1221.api.dto.DailyReportResponse;
 import com.example.test1221.api.dto.ReportHistoryResponse;
+import com.example.test1221.api.exception.ApiExceptionHandling;
 import com.example.test1221.api.mapper.Mapper;
 import com.example.test1221.core.model.DailyReport;
 import com.example.test1221.core.model.ReportHistory;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.LocalDate;
 import java.util.List;
 
+@ApiExceptionHandling
 @RestController
 @RequestMapping("/report")
 @RequiredArgsConstructor
