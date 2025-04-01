@@ -1,5 +1,6 @@
 package com.example.test1221.core.service;
 
+import com.example.test1221.core.exception.EntityNotFoundException;
 import com.example.test1221.core.model.*;
 import com.example.test1221.core.repository.MealRepository;
 import jakarta.annotation.Nullable;
@@ -21,14 +22,13 @@ public class ReportService {
     public DailyReport getDailyReport(long customerId, @Nullable LocalDate dateTime) {
         LocalDate date = dateTime != null ? dateTime : LocalDate.now();
 
-
         LocalDateTime startTime = date.atStartOfDay();
 
         LocalDateTime endTime = date.plusDays(1).atStartOfDay();
 
         List<Meal> meals = mealRepository.findAllByCustomerCustomerIdAndDateBetween(
                 customerId, startTime, endTime
-        ).orElseThrow(RuntimeException::new);
+        ).orElseThrow(() -> new EntityNotFoundException("Can't find meals on date: " + dateTime));
 
         int totalCalories = 0;
         int totalProtein = 0;
