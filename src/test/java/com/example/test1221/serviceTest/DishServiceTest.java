@@ -6,17 +6,15 @@ import com.example.test1221.core.exception.ValidationException;
 import com.example.test1221.core.model.Dish;
 import com.example.test1221.core.repository.DishRepository;
 import com.example.test1221.core.service.DishService;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
-import java.util.ArrayList;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -29,10 +27,10 @@ import static org.mockito.Mockito.lenient;
 @ExtendWith(MockitoExtension.class)
 public class DishServiceTest {
 
-    @Mock
+    @MockitoBean
     private DishRepository dishRepository;
 
-    @InjectMocks
+    @Autowired
     private DishService dishService;
 
     public static Stream<Arguments> dishValidationTestCases() {
@@ -99,7 +97,7 @@ public class DishServiceTest {
     @MethodSource("dishValidationTestCases")
     void testCreateDish(PostDishDto dishDto, Class<? extends Exception> expectedException) {
         // Mock dish existence check
-        lenient().when(dishRepository.findByTitle(anyString()))
+        lenient().when(dishRepository.existsByTitle(anyString()))
                 .thenAnswer(inv -> "Existing Dish".equals(inv.getArgument(0)));
 
         // Mock save to return the input dish
@@ -113,7 +111,6 @@ public class DishServiceTest {
         }
     }
 
-    // Helper methods to create test data
     private static PostDishDto createValidDish() {
         return PostDishDto.builder()
                 .title("Test Dish")
@@ -123,13 +120,6 @@ public class DishServiceTest {
                 .fat(15)
                 .build();
     }
-
-//    @Test
-//    public void testExistDish() {
-//        ArrayList<String> dishes = new ArrayList<>();
-//        lenient().when(dishRepository.findByTitle(anyString()))
-//                .then(inv -> dishes.stream().findFirst((title) -> title == inv.getArgument(0)));
-//    }
 
     private static PostDishDto createDishWithCalories(int calories) {
         PostDishDto dto = createValidDish();

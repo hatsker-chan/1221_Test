@@ -8,4 +8,6 @@ import java.util.Optional;
 public interface DishRepository extends JpaRepository<Dish, Long> {
 
     Optional<Dish> findByTitle(String title);
+
+    boolean existsByTitle(String title);
 }

@@ -39,7 +39,7 @@ public class DishService {
     }
 
     private boolean checkDish(String title) {
-        return dishRepository.findByTitle(title).isPresent();
+        return dishRepository.existsByTitle(title);
     }
 
     private void validateDish(PostDishDto dish) {
