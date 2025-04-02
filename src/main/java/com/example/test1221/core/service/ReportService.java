@@ -71,7 +71,7 @@ public class ReportService {
                 .dateTo(dateTo);
 
         ArrayList<DailyReport> reports = new ArrayList<>();
-        while (dateFrom.isBefore(dateTo)) {
+        while (dateFrom.isBefore(dateTo) || dateFrom.isEqual(dateTo)) {
             DailyReport dailyReport = getDailyReport(customerId, dateFrom);
             if (dailyReport.getTotalMeals() == 0) {
                 dateFrom = dateFrom.plusDays(1);

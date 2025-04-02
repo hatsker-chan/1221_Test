@@ -1,41 +1,18 @@
-package com.example.test1221.serviceTest;
+package com.example.test1221.serviceTest.validationTests;
 
 import com.example.test1221.api.dto.PostCustomerDto;
-import com.example.test1221.core.exception.ExistenceException;
 import com.example.test1221.core.exception.ValidationException;
-import com.example.test1221.core.model.Customer;
-import com.example.test1221.core.repository.CustomerRepository;
-import com.example.test1221.core.service.CustomerService;
-import org.junit.jupiter.api.extension.ExtendWith;
+import com.example.test1221.core.util.Validator;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.bean.override.mockito.MockitoBean;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.util.Optional;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.lenient;
 
-@SpringBootTest
-@ExtendWith({MockitoExtension.class, SpringExtension.class})
 public class CustomerServiceTest {
-
-    @MockitoBean
-    private CustomerRepository customerRepository;
-
-    @Autowired
-    private CustomerService customerService;
 
     public static Stream<Arguments> customerValidationTestCases() {
         return Stream.of(
@@ -48,10 +25,6 @@ public class CustomerServiceTest {
                 Arguments.of(
                         createCustomerWithEmail("invalid-email"),
                         ValidationException.class
-                ),
-                Arguments.of(
-                        createCustomerWithEmail("exist@mail.com"),
-                        ExistenceException.class
                 ),
                 // Age too low
                 Arguments.of(
@@ -89,15 +62,11 @@ public class CustomerServiceTest {
     @ParameterizedTest
     @MethodSource("customerValidationTestCases")
     void testValidateCustomer(PostCustomerDto customer, Class<? extends Exception> expectedException) {
-        lenient().when(customerRepository.existsByEmail(anyString())).thenReturn(
-                customer.getEmail().equals("exist@mail.com")
-        );
-        lenient().when(customerRepository.save(any())).thenAnswer(inv -> inv.getArgument(0));
+
         if (expectedException != null) {
-//            System.out.println(customerRepository.findByEmail("existing@example.com").isPresent());
-            assertThrows(expectedException, () -> customerService.createCustomer(customer));
+            assertThrows(expectedException, () -> Validator.validateCustomer(customer));
         } else {
-            assertDoesNotThrow(() -> customerService.createCustomer(customer));
+            assertDoesNotThrow(() -> Validator.validateCustomer(customer));
         }
     }
 

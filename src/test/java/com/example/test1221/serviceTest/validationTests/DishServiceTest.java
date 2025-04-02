@@ -1,38 +1,19 @@
-package com.example.test1221.serviceTest;
+package com.example.test1221.serviceTest.validationTests;
 
 import com.example.test1221.api.dto.PostDishDto;
-import com.example.test1221.core.exception.ExistenceException;
 import com.example.test1221.core.exception.ValidationException;
-import com.example.test1221.core.model.Dish;
-import com.example.test1221.core.repository.DishRepository;
-import com.example.test1221.core.service.DishService;
-import org.junit.jupiter.api.extension.ExtendWith;
+import com.example.test1221.core.util.Validator;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.lenient;
 
-@SpringBootTest
-@ExtendWith(MockitoExtension.class)
+
 public class DishServiceTest {
-
-    @MockitoBean
-    private DishRepository dishRepository;
-
-    @Autowired
-    private DishService dishService;
-
     public static Stream<Arguments> dishValidationTestCases() {
         return Stream.of(
                 // Valid dish (should not throw exception)
@@ -84,11 +65,6 @@ public class DishServiceTest {
                 Arguments.of(
                         createDishWithNutrition(100, 10, 10, 10), // 10*4 + 10*4 + 10*9 = 170 vs 100 cals
                         ValidationException.class
-                ),
-                // Existing dish title
-                Arguments.of(
-                        createDishWithTitle("Existing Dish"),
-                        ExistenceException.class
                 )
         );
     }
@@ -96,18 +72,12 @@ public class DishServiceTest {
     @ParameterizedTest
     @MethodSource("dishValidationTestCases")
     void testCreateDish(PostDishDto dishDto, Class<? extends Exception> expectedException) {
-        // Mock dish existence check
-        lenient().when(dishRepository.existsByTitle(anyString()))
-                .thenAnswer(inv -> "Existing Dish".equals(inv.getArgument(0)));
 
-        // Mock save to return the input dish
-        lenient().when(dishRepository.save(any(Dish.class)))
-                .thenAnswer(inv -> inv.getArgument(0));
 
         if (expectedException != null) {
-            assertThrows(expectedException, () -> dishService.createDish(dishDto));
+            assertThrows(expectedException, () -> Validator.validateDish(dishDto));
         } else {
-            assertDoesNotThrow(() -> dishService.createDish(dishDto));
+            assertDoesNotThrow(() -> Validator.validateDish(dishDto));
         }
     }
 

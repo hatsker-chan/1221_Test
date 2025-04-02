@@ -7,17 +7,17 @@ import com.example.test1221.core.exception.ValidationException;
 import com.example.test1221.core.model.Customer;
 import com.example.test1221.core.model.Goal;
 import com.example.test1221.core.repository.CustomerRepository;
+import com.example.test1221.core.util.Validator;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.regex.Pattern;
 
 @Service
 @AllArgsConstructor
 public class CustomerService {
 
-    private final CustomerRepository customerRepository;
+    private CustomerRepository customerRepository;
 
     public Customer createCustomer(PostCustomerDto customer) {
         var goal = switch (customer.getGoal().toLowerCase()) {
@@ -27,7 +27,11 @@ public class CustomerService {
             default -> throw new ValidationException("Invalid goal");
         };
 
-        validateCustomer(customer);
+        Validator.validateCustomer(customer);
+
+        if (checkEmail(customer.getEmail())) {
+            throw new ExistenceException(String.format("Customer with email \"%s\" already exists", customer.getEmail()));
+        }
 
         Customer newCustomer = Customer.builder()
                 .name(customer.getName())
@@ -37,7 +41,6 @@ public class CustomerService {
                 .height(customer.getHeight())
                 .weight(customer.getWeight())
                 .created_at(LocalDate.now())
-//                .created_at(LocalDate.of(2025, Month.MARCH, 25))
                 .goal(goal)
                 .build();
 
@@ -77,21 +80,4 @@ public class CustomerService {
         return (int) bmr;
     }
 
-    private void validateCustomer(PostCustomerDto customer) {
-        if (!Pattern.compile("^(.+)@(\\S+)$").matcher(customer.getEmail()).matches()) {
-            throw new ValidationException("Email is not valid: " + customer.getEmail());
-        }
-        if (checkEmail(customer.getEmail())) {
-            throw new ExistenceException("Email address is already in use");
-        }
-        if (customer.getAge() < 12 || customer.getAge() > 100) {
-            throw new ValidationException("Age must be between 12 and 100");
-        }
-        if (customer.getHeight() < 120 || customer.getHeight() > 230) {
-            throw new ValidationException("Height must be between 120 and 230");
-        }
-        if (customer.getWeight() < 30 || customer.getWeight() > 200) {
-            throw new ValidationException("Weight must be between 30 and 200");
-        }
-    }
 }
