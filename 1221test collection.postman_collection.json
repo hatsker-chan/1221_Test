@@ -1,0 +1,575 @@
+{
+	"info": {
+		"_postman_id": "c03ee6f7-4974-4e5f-865f-e2eb24bf4cec",
+		"name": "1221test collection",
+		"description": "This is a collection that covers most of test api functionality.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41698483"
+	},
+	"item": [
+		{
+			"name": "init",
+			"item": [
+				{
+					"name": "init users",
+					"item": [
+						{
+							"name": "create male user",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"let dishes = []"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Иван Иванов\",\r\n  \"email\": \"ivan@example.com\",\r\n  \"age\": 30,\r\n  \"isMale\": true,\r\n  \"weight\": 75.5,\r\n  \"height\": 180.0,\r\n  \"goal\": \"lose_weight\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/customers",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"customers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create female user",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Анна Петрова\",\r\n  \"email\": \"anna@example.com\",\r\n  \"age\": 25,\r\n  \"isMale\": false,\r\n  \"weight\": 60.2,\r\n  \"height\": 165.5,\r\n  \"goal\": \"keep_weight\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/customers",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"customers"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "init dishes",
+					"item": [
+						{
+							"name": "create dish",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"{{title}}\",\r\n    \"calories\": {{calories}},\r\n    \"protein\": {{protein}},\r\n    \"carbohydrates\": {{carbohydrates}},\r\n    \"fat\": {{fat}}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/dishes",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"dishes"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "init meals",
+					"item": [
+						{
+							"name": "1",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customerId\": 1,\r\n    \"note\": \"Завтрак 1\",\r\n    \"date\": \"2025-03-27T08:15:00\",\r\n    \"dishes\": [\r\n        {\r\n            \"dishId\": 2,\r\n            \"title\": \"Овсянка с бананом\",\r\n            \"caloriesPerDish\": 300,\r\n            \"protein\": 8,\r\n            \"carbohydrates\": 50,\r\n            \"fat\": 6\r\n        },\r\n        {\r\n            \"dishId\": 4,\r\n            \"title\": \"Творог с медом\",\r\n            \"caloriesPerDish\": 200,\r\n            \"protein\": 20,\r\n            \"carbohydrates\": 15,\r\n            \"fat\": 7\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/meals/testWithDate",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"meals",
+										"testWithDate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "2",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customerId\": 1,\r\n    \"note\": \"Обед 1\",\r\n    \"date\": \"2025-03-27T13:00:00\",\r\n    \"dishes\": [\r\n        {\r\n            \"dishId\": 1,\r\n            \"title\": \"Куриная грудка с брокколи\",\r\n            \"caloriesPerDish\": 250,\r\n            \"protein\": 40,\r\n            \"carbohydrates\": 10,\r\n            \"fat\": 5\r\n        },\r\n        {\r\n            \"dishId\": 5,\r\n            \"title\": \"Греческий салат\",\r\n            \"caloriesPerDish\": 180,\r\n            \"protein\": 6,\r\n            \"carbohydrates\": 12,\r\n            \"fat\": 10\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/meals/testWithDate",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"meals",
+										"testWithDate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "3",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customerId\": 1,\r\n    \"note\": \"Ужин 1\",\r\n    \"date\": \"2025-03-27T19:30:00\",\r\n    \"dishes\": [\r\n        {\r\n            \"dishId\": 3,\r\n            \"title\": \"Лосось с киноа\",\r\n            \"caloriesPerDish\": 400,\r\n            \"protein\": 30,\r\n            \"carbohydrates\": 35,\r\n            \"fat\": 15\r\n        },\r\n        {\r\n            \"dishId\": 9,\r\n            \"title\": \"Фруктовый салат\",\r\n            \"caloriesPerDish\": 150,\r\n            \"protein\": 2,\r\n            \"carbohydrates\": 35,\r\n            \"fat\": 0\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/meals/testWithDate",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"meals",
+										"testWithDate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "4",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customerId\": 1,\r\n    \"note\": \"Перекус\",\r\n    \"date\": \"2025-03-27T11:00:00\",\r\n    \"dishes\": [\r\n        {\r\n            \"dishId\": 6,\r\n            \"title\": \"Протеиновый коктейль\",\r\n            \"caloriesPerDish\": 220,\r\n            \"protein\": 35,\r\n            \"carbohydrates\": 10,\r\n            \"fat\": 2\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/meals/testWithDate",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"meals",
+										"testWithDate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "5",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customerId\": 1,\r\n    \"note\": \"Завтрак 2\",\r\n    \"date\": \"2025-03-28T07:45:00\",\r\n    \"dishes\": [\r\n        {\r\n            \"dishId\": 8,\r\n            \"title\": \"Омлет с овощами\",\r\n            \"caloriesPerDish\": 280,\r\n            \"protein\": 18,\r\n            \"carbohydrates\": 10,\r\n            \"fat\": 20\r\n        },\r\n        {\r\n            \"dishId\": 2,\r\n            \"title\": \"Овсянка с бананом\",\r\n            \"caloriesPerDish\": 300,\r\n            \"protein\": 8,\r\n            \"carbohydrates\": 50,\r\n            \"fat\": 6\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/meals/testWithDate",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"meals",
+										"testWithDate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "6",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customerId\": 1,\r\n    \"note\": \"Обед 2\",\r\n    \"date\": \"2025-03-28T12:30:00\",\r\n    \"dishes\": [\r\n        {\r\n            \"dishId\": 7,\r\n            \"title\": \"Паста с тунцом\",\r\n            \"caloriesPerDish\": 450,\r\n            \"protein\": 25,\r\n            \"carbohydrates\": 60,\r\n            \"fat\": 12\r\n        },\r\n        {\r\n            \"dishId\": 5,\r\n            \"title\": \"Греческий салат\",\r\n            \"caloriesPerDish\": 180,\r\n            \"protein\": 6,\r\n            \"carbohydrates\": 12,\r\n            \"fat\": 10\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/meals/testWithDate",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"meals",
+										"testWithDate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "7",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customerId\": 1,\r\n    \"note\": \"Ужин 2\",\r\n    \"date\": \"2025-03-28T20:15:00\",\r\n    \"dishes\": [\r\n        {\r\n            \"dishId\": 10,\r\n            \"title\": \"Стейк с картофелем\",\r\n            \"caloriesPerDish\": 600,\r\n            \"protein\": 45,\r\n            \"carbohydrates\": 40,\r\n            \"fat\": 30\r\n        },\r\n        {\r\n            \"dishId\": 3,\r\n            \"title\": \"Лосось с киноа\",\r\n            \"caloriesPerDish\": 400,\r\n            \"protein\": 30,\r\n            \"carbohydrates\": 35,\r\n            \"fat\": 15\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/meals/testWithDate",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"meals",
+										"testWithDate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "8",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customerId\": 1,\r\n    \"note\": \"Поздний ужин\",\r\n    \"date\": \"2025-03-29T22:00:00\",\r\n    \"dishes\": [\r\n        {\r\n            \"dishId\": 4,\r\n            \"title\": \"Творог с медом\",\r\n            \"caloriesPerDish\": 200,\r\n            \"protein\": 20,\r\n            \"carbohydrates\": 15,\r\n            \"fat\": 7\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/meals/testWithDate",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"meals",
+										"testWithDate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "9",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customerId\": 1,\r\n    \"note\": \"Бранч\",\r\n    \"date\": \"2025-03-25T10:30:00\",\r\n    \"dishes\": [\r\n        {\r\n            \"dishId\": 8,\r\n            \"title\": \"Омлет с овощами\",\r\n            \"caloriesPerDish\": 280,\r\n            \"protein\": 18,\r\n            \"carbohydrates\": 10,\r\n            \"fat\": 20\r\n        },\r\n        {\r\n            \"dishId\": 9,\r\n            \"title\": \"Фруктовый салат\",\r\n            \"caloriesPerDish\": 150,\r\n            \"protein\": 2,\r\n            \"carbohydrates\": 35,\r\n            \"fat\": 0\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/meals/testWithDate",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"meals",
+										"testWithDate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "10",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customerId\": 1,\r\n    \"note\": \"Ужин 3\",\r\n    \"date\": \"2025-03-25T19:00:00\",\r\n    \"dishes\": [\r\n        {\r\n            \"dishId\": 1,\r\n            \"title\": \"Куриная грудка с брокколи\",\r\n            \"caloriesPerDish\": 250,\r\n            \"protein\": 40,\r\n            \"carbohydrates\": 10,\r\n            \"fat\": 5\r\n        },\r\n        {\r\n            \"dishId\": 3,\r\n            \"title\": \"Лосось с киноа\",\r\n            \"caloriesPerDish\": 400,\r\n            \"protein\": 30,\r\n            \"carbohydrates\": 35,\r\n            \"fat\": 15\r\n        },\r\n        {\r\n            \"dishId\": 5,\r\n            \"title\": \"Греческий салат\",\r\n            \"caloriesPerDish\": 180,\r\n            \"protein\": 6,\r\n            \"carbohydrates\": 12,\r\n            \"fat\": 10\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/meals/testWithDate",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"meals",
+										"testWithDate"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "manual create dish",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Test\",\r\n    \"calories\": 400,\r\n    \"protein\": 30,\r\n    \"carbohydrates\": 35,\r\n    \"fat\": 9\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/dishes",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"dishes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get calories per day",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/customers/1/daily_calories",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customers",
+						"1",
+						"daily_calories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all dishes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/dishes",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"dishes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create meal",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"customerId\": 1,\r\n    \"note\": \"Ужин 3\",\r\n    \"dishes\": [\r\n        {\r\n            \"dishId\": 8,\r\n            \"title\": \"Омлет с овощами\",\r\n            \"caloriesPerDish\": 280,\r\n            \"protein\": 18,\r\n            \"carbohydrates\": 10,\r\n            \"fat\": 20\r\n        },\r\n        {\r\n            \"dishId\": 9,\r\n            \"title\": \"Фруктовый салат\",\r\n            \"caloriesPerDish\": 150,\r\n            \"protein\": 2,\r\n            \"carbohydrates\": 35,\r\n            \"fat\": 0\r\n        },\r\n        {\r\n            \"dishId\": 10,\r\n            \"title\": \"Стейк с картофелем\",\r\n            \"caloriesPerDish\": 600,\r\n            \"protein\": 45,\r\n            \"carbohydrates\": 40,\r\n            \"fat\": 30\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/meals",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"meals"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get daily report",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/report/daily?date=2025-04-02&customerId=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"report",
+						"daily"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "2025-04-02"
+						},
+						{
+							"key": "customerId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get today report",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/report/daily?customerId=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"report",
+						"daily"
+					],
+					"query": [
+						{
+							"key": "customerId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get history",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/report/history?customerId=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"report",
+						"history"
+					],
+					"query": [
+						{
+							"key": "customerId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
