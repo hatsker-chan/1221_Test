@@ -1,0 +1,21 @@
+services:
+  db:
+    image: 'postgres:13'
+    environment:
+      - 'POSTGRES_DB=test1221'
+      - 'POSTGRES_PASSWORD=0000'
+      - 'POSTGRES_USER=postgres'
+      - 'DB_HOST=db'
+    ports:
+      - '5433:5432'
+  app:
+    image: axlet/test1221
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '8080:8080'
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db/test1221
