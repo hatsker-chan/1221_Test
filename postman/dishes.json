@@ -1,0 +1,72 @@
+[
+  {
+    "title": "Куриная грудка с брокколи",
+    "calories": 250,
+    "protein": 40,
+    "carbohydrates": 10,
+    "fat": 5
+  },
+  {
+    "title": "Овсянка с бананом",
+    "calories": 300,
+    "protein": 8,
+    "carbohydrates": 50,
+    "fat": 6
+  },
+  {
+    "title": "Лосось с киноа",
+    "calories": 400,
+    "protein": 30,
+    "carbohydrates": 35,
+    "fat": 15
+  },
+  {
+    "title": "Творог с медом",
+    "calories": 200,
+    "protein": 20,
+    "carbohydrates": 15,
+    "fat": 7
+  },
+  {
+    "title": "Греческий салат",
+    "calories": 180,
+    "protein": 6,
+    "carbohydrates": 12,
+    "fat": 10
+  },
+  {
+    "title": "Протеиновый коктейль",
+    "calories": 220,
+    "protein": 35,
+    "carbohydrates": 10,
+    "fat": 2
+  },
+  {
+    "title": "Паста с тунцом",
+    "calories": 450,
+    "protein": 25,
+    "carbohydrates": 60,
+    "fat": 12
+  },
+  {
+    "title": "Омлет с овощами",
+    "calories": 280,
+    "protein": 18,
+    "carbohydrates": 10,
+    "fat": 20
+  },
+  {
+    "title": "Фруктовый салат",
+    "calories": 150,
+    "protein": 2,
+    "carbohydrates": 35,
+    "fat": 0
+  },
+  {
+    "title": "Стейк с картофелем",
+    "calories": 600,
+    "protein": 45,
+    "carbohydrates": 40,
+    "fat": 30
+  }
+]
