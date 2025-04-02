@@ -2,7 +2,6 @@ package com.example.test1221.core.service;
 
 import com.example.test1221.api.dto.PostDishDto;
 import com.example.test1221.core.exception.ExistenceException;
-import com.example.test1221.core.exception.ValidationException;
 import com.example.test1221.core.model.Dish;
 import com.example.test1221.core.repository.DishRepository;
 import com.example.test1221.core.util.Validator;

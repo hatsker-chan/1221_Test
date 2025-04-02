@@ -59,17 +59,6 @@ public class CustomerServiceTest {
         );
     }
 
-    @ParameterizedTest
-    @MethodSource("customerValidationTestCases")
-    void testValidateCustomer(PostCustomerDto customer, Class<? extends Exception> expectedException) {
-
-        if (expectedException != null) {
-            assertThrows(expectedException, () -> Validator.validateCustomer(customer));
-        } else {
-            assertDoesNotThrow(() -> Validator.validateCustomer(customer));
-        }
-    }
-
     private static PostCustomerDto createValidCustomer() {
         PostCustomerDto dto = new PostCustomerDto();
         dto.setEmail("alex@gmail.com");
@@ -102,5 +91,16 @@ public class CustomerServiceTest {
         PostCustomerDto dto = createValidCustomer();
         dto.setWeight(weight);
         return dto;
+    }
+
+    @ParameterizedTest
+    @MethodSource("customerValidationTestCases")
+    void testValidateCustomer(PostCustomerDto customer, Class<? extends Exception> expectedException) {
+
+        if (expectedException != null) {
+            assertThrows(expectedException, () -> Validator.validateCustomer(customer));
+        } else {
+            assertDoesNotThrow(() -> Validator.validateCustomer(customer));
+        }
     }
 }

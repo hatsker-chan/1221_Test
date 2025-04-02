@@ -69,18 +69,6 @@ public class DishServiceTest {
         );
     }
 
-    @ParameterizedTest
-    @MethodSource("dishValidationTestCases")
-    void testCreateDish(PostDishDto dishDto, Class<? extends Exception> expectedException) {
-
-
-        if (expectedException != null) {
-            assertThrows(expectedException, () -> Validator.validateDish(dishDto));
-        } else {
-            assertDoesNotThrow(() -> Validator.validateDish(dishDto));
-        }
-    }
-
     private static PostDishDto createValidDish() {
         return PostDishDto.builder()
                 .title("Test Dish")
@@ -129,5 +117,17 @@ public class DishServiceTest {
                 .carbohydrates(carbs)
                 .fat(fat)
                 .build();
+    }
+
+    @ParameterizedTest
+    @MethodSource("dishValidationTestCases")
+    void testCreateDish(PostDishDto dishDto, Class<? extends Exception> expectedException) {
+
+
+        if (expectedException != null) {
+            assertThrows(expectedException, () -> Validator.validateDish(dishDto));
+        } else {
+            assertDoesNotThrow(() -> Validator.validateDish(dishDto));
+        }
     }
 }
